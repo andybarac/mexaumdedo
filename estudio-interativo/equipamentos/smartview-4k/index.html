@@ -21,11 +21,9 @@
 <linearGradient id="feed" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#335d74"/><stop offset=".55" stop-color="#223c4c"/><stop offset="1" stop-color="#13232d"/></linearGradient>
 <filter id="bluefilter"><feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 .14  0 0 1 0 .82  0 0 0 1 0"/></filter>
 </defs>
-
 <rect x="36" y="42" width="1388" height="602" rx="10" fill="url(#body)" stroke="#727b83" stroke-width="2"/>
 <rect x="36" y="42" width="54" height="602" fill="#14181c" stroke="#727b83"/><rect x="1370" y="42" width="54" height="602" fill="#14181c" stroke="#727b83"/>
 <g fill="#0d1012" stroke="#969ea5"><rect x="53" y="65" width="20" height="28" rx="8"/><rect x="53" y="593" width="20" height="28" rx="8"/><rect x="1388" y="65" width="20" height="28" rx="8"/><rect x="1388" y="593" width="20" height="28" rx="8"/></g>
-
 <rect id="tally" x="104" y="92" width="1250" height="452" rx="4" fill="none" stroke="transparent" stroke-width="18"/>
 <rect x="111" y="99" width="1236" height="438" rx="4" fill="#090c0e" stroke="#444c53" stroke-width="2"/>
 
@@ -60,26 +58,19 @@
 
 <section class="lesson" aria-live="polite">
 <h2 id="title">Seleção de entrada</h2><div id="term" class="muted">(Input)</div>
-<div class="grid" style="margin-top:16px">
-<div><div class="ey">Como funciona</div><p id="func" class="copy"></p></div>
-<div><div class="ey">Exemplo de uso</div><p id="example" class="copy"></p></div>
-</div>
+<div class="grid" style="margin-top:16px"><div><div class="ey">Como funciona</div><p id="func" class="copy"></p></div><div><div class="ey">Exemplo de uso</div><p id="example" class="copy"></p></div></div>
 <div class="ey">Experimente</div><div id="modes" class="modes"></div><div id="feedback" class="feedback"></div>
 </section>
 
-<section class="tallycard">
-<div class="ey">Sinalização da fonte</div>
-<p class="copy">A borda do monitor pode indicar estados de tally.</p>
-<div class="modes">
+<section class="tallycard"><div class="ey">Sinalização da fonte</div><p class="copy">A borda do monitor pode indicar estados de tally.</p><div class="modes">
 <button class="tallybtn" data-tally="red">No ar</button><button class="tallybtn" data-tally="green">Prévia</button><button class="tallybtn" data-tally="blue">Azul</button><button class="tallybtn active" data-tally="off">Sem tally</button>
-</div>
-</section>
+</div></section>
 
 <script>
 (()=>{const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const state={brightness:1,zoom:false,blue:false,hv:false,peaking:false,lut:0,marker:0,tally:'off'};
-function apply(){const s=$('#screen');s.style.opacity=String(state.brightness);s.setAttribute('transform',state.zoom?'translate(-110 -42) scale(1.16)':'');s.style.filter=state.blue?'url(#bluefilter)':'';$('#blanktop').setAttribute('opacity',state.hv?'.85':'0');$('#blankleft').setAttribute('opacity',state.hv?'.85':'0');$('#peak').setAttribute('opacity',state.peaking?'1':'0');$('#lutwarm').setAttribute('opacity',state.lut===1?'.18':'0');$('#lutcool').setAttribute('opacity',state.lut===2?'.18':'0');let h=state.marker===1||state.marker===3,v=state.marker===2||state.marker===3;$('#h1').setAttribute('opacity',h?'1':'0');$('#h2').setAttribute('opacity',h?'1':'0');$('#v1').setAttribute('opacity',v?'1':'0');$('#v2').setAttribute('opacity',v?'1':'0');}
-function applyTally(){$('#tally').setAttribute('stroke',state.tally==='red'? '#ef4444':state.tally==='green'?'#22c55e':state.tally==='blue'?'#3b82f6':'transparent');$$('.tallybtn').forEach(b=>b.classList.toggle('active',b.dataset.tally===state.tally))}
+function apply(){const s=$('#screen');s.style.opacity=String(state.brightness);s.setAttribute('transform',state.zoom?'translate(-110 -42) scale(1.16)':'');s.style.filter=state.blue?'url(#bluefilter)':'';$('#blanktop').setAttribute('opacity',state.hv?'.85':'0');$('#blankleft').setAttribute('opacity',state.hv?'.85':'0');$('#peak').setAttribute('opacity',state.peaking?'1':'0');$('#lutwarm').setAttribute('opacity',state.lut===1?'.18':'0');$('#lutcool').setAttribute('opacity',state.lut===2?'.18':'0');let h=state.marker===1||state.marker===3,v=state.marker===2||state.marker===3;$('#h1').setAttribute('opacity',h?'1':'0');$('#h2').setAttribute('opacity',h?'1':'0');$('#v1').setAttribute('opacity',v?'1':'0');$('#v2').setAttribute('opacity',v?'1':'0')}
+function applyTally(){$('#tally').setAttribute('stroke',state.tally==='red'?'#ef4444':state.tally==='green'?'#22c55e':state.tally==='blue'?'#3b82f6':'transparent');$$('.tallybtn').forEach(b=>b.classList.toggle('active',b.dataset.tally===state.tally))}
 const L={
 input:{t:'Seleção de entrada',term:'Input',f:'Esse controle escolhe qual sinal de vídeo o monitor exibe.',e:'Se duas fontes chegam ao mesmo monitor, você pode alternar entre elas para conferir rapidamente qual sinal está correto.',m:[['SDI 1',()=>{},'A primeira entrada é exibida.'],['SDI 2',()=>{},'A segunda entrada é exibida.']]},
 display:{t:'Brilho da tela',term:'Display',f:'Esse controle altera o brilho do visor sem modificar o sinal de vídeo.',e:'Em uma sala escura, menos brilho deixa o monitor mais confortável. Em um ambiente claro, aumentar o brilho pode facilitar a visualização.',m:[['Baixo',()=>{state.brightness=.58;apply()},'A imagem fica mais escura.'],['Normal',()=>{state.brightness=1;apply()},'O brilho volta ao nível normal.'],['Alto',()=>{state.brightness=1.15;apply()},'A imagem fica mais intensa.']]},
@@ -92,7 +83,6 @@ marker:{t:'Guias de enquadramento',term:'Marker',f:'Esse recurso coloca guias so
 };
 function show(k){const l=L[k];$$('.spot').forEach(s=>s.classList.toggle('selected',s.dataset.key===k));$('#title').textContent=l.t;$('#term').textContent='('+l.term+')';$('#func').textContent=l.f;$('#example').textContent=l.e;const box=$('#modes');box.innerHTML='';l.m.forEach((m,i)=>{const b=document.createElement('button');b.className='sim';b.textContent=m[0];b.onclick=()=>{[...box.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');m[1]();$('#feedback').textContent=m[2]};box.appendChild(b);if(i===0)setTimeout(()=>b.click(),0)})}
 function resetAll(){Object.assign(state,{brightness:1,zoom:false,blue:false,hv:false,peaking:false,lut:0,marker:0,tally:'off'});apply();applyTally();show('input')}
-$$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$$('.tallybtn').forEach(b=>b.onclick=()=>{state.tally=b.dataset.tally;applyTally()});$('#reset').onclick=resetAll;resetAll();
-})();
+$$('.spot').forEach(s=>s.onclick=()=>show(s.dataset.key));$$('.tallybtn').forEach(b=>b.onclick=()=>{state.tally=b.dataset.tally;applyTally()});$('#reset').onclick=resetAll;resetAll()})();
 </script>
 </main></body></html>
